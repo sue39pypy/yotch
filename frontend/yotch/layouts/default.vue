@@ -17,6 +17,11 @@ html {
   box-sizing: border-box;
 }
 
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
 *,
 *:before,
 *:after {

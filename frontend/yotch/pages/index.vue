@@ -6,7 +6,7 @@
         yotch
       </h1>
       <h2 class="subtitle">
-        My kryptonian Nuxt.js project
+        My splendiferous Nuxt.js project
       </h2>
       <div class="links">
         <a
@@ -25,6 +25,12 @@
         </a>
       </div>
     </div>
+    <ul>
+      <li v-for="(wallpaper, index) in wallpapers"
+        :key="'wallpaper-' + index"
+        :style="{ backgroundImage: 'url(' + wallpaper.image + ')' }">
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -34,6 +40,19 @@ import Logo from '~/components/Logo.vue'
 export default {
   components: {
     Logo
+  },
+  data () {
+    return {
+      wallpapers: null
+    }
+  },
+  async mounted () {
+    const self = this
+    const url = "/api/wallpapers"
+    await this.$axios.get(url)
+    .then((response) => {
+      self.wallpapers = response.data.wallpapers
+    })
   }
 }
 </script>

@@ -11,6 +11,7 @@ __pycache__/
 asgi.py
 db.sqlite3
 manage.py
+media/
 migrations/
 requirements.txt
 settings.py
@@ -18,10 +19,16 @@ urls.py
 wsgi.py
 
 # frontend
+.babelrc
+jest.config.js
+nuxt.config.js
+package.json
+yarn.lock
 # dependencies
 node_modules/
 package-lock.json
 # logs
+/backend/logs/
 npm-debug.log
 yarn-error.log
 # other
@@ -33,6 +40,7 @@ newrelic_agent.log
 .DS_STORE
 .editorconfig
 .eslintrc
+README.md
 # docs
 /docs
 # @nuxtjs/pwa
