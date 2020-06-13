@@ -1,41 +1,19 @@
 <template>
   <div class="container">
     <div>
-      <logo />
-      <h1 class="title">
-        yotch
-      </h1>
-      <h2 class="subtitle">
-        My splendiferous Nuxt.js project
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+      <ul>
+        <li v-for="(wallpaper, index) in wallpapers"
+          :key="'wallpaper-' + index"
+          :style="{ backgroundImage: 'url(' + wallpaper.image + ')' }">
+        </li>
+      </ul>
     </div>
-    <ul>
-      <li v-for="(wallpaper, index) in wallpapers"
-        :key="'wallpaper-' + index"
-        :style="{ backgroundImage: 'url(' + wallpaper.image + ')' }">
-      </li>
-    </ul>
   </div>
 </template>
 
 <script>
 import Logo from '~/components/Logo.vue'
+import axios from 'axios'
 
 export default {
   components: {
@@ -46,13 +24,10 @@ export default {
       wallpapers: null
     }
   },
-  async mounted () {
-    const self = this
+  async asyncData ({ $axios }) {
     const url = "/api/wallpapers"
-    await this.$axios.get(url)
-    .then((response) => {
-      self.wallpapers = response.data.wallpapers
-    })
+    const response = await $axios.get(url)
+    return { wallpapers: response.data.wallpapers }
   }
 }
 </script>

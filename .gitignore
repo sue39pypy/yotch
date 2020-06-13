@@ -9,6 +9,7 @@ db/
 __init__.py
 __pycache__/
 asgi.py
+/backend/static
 db.sqlite3
 manage.py
 media/
@@ -24,6 +25,11 @@ jest.config.js
 nuxt.config.js
 package.json
 yarn.lock
+
+# nginx
+app_nginx.conf
+uwsgi_params
+
 # dependencies
 node_modules/
 package-lock.json
