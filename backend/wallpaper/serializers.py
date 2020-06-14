@@ -14,5 +14,10 @@ class WallpaperListSerializer(serializers.ModelSerializer):
         model = Wallpaper
         fields = (
             'name',
-            'image'
+            'image_path'
         )
+
+    image_path = serializers.SerializerMethodField()
+
+    def get_image_path(self, obj):
+        return '/media/' + str(obj.image)

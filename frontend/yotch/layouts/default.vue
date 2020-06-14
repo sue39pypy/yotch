@@ -1,10 +1,37 @@
 <template>
   <div>
+    <common-header />
     <nuxt />
   </div>
 </template>
 
+<script>
+import CommonHeader from '~/components/layouts/Header.vue'
+
+export default {
+  components: {
+    CommonHeader
+  }
+}
+</script>
+
 <style>
+common-header {
+  z-index: 100;
+}
+
+* {
+  color: #000;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 html {
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, 'Helvetica Neue', Arial, sans-serif;
