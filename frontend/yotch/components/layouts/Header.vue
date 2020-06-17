@@ -1,8 +1,8 @@
 <template>
   <header>
-    <ul class="menus-wrap">
+    <ul class="menu-wrap">
       <li v-for="(menu, index) in menus" :key="'menu-' + index">
-        <a :href="menu.path" class="menu-link">{{ menu.title }}</a>
+        <nuxt-link :to="menu.path" class="menu-link">{{ menu.title }}</nuxt-link>
       </li>
     </ul>
   </header>
@@ -31,20 +31,20 @@ export default {
 
 header {
   left: 0;
-  padding: 28px 5% 0;
+  padding: 28px 5% 12px;;
   position: fixed;
   top: 0;
   width: 100vw;
 }
 
-.menus-wrap {
+.menu-wrap {
   display: flex;
   display: -ms-flexbox;
   justify-content: flex-end;
   margin-left: auto;
 }
 
-.menus-wrap > * {
+.menu-wrap > * {
   margin-left: 60px;
   font-weight: bold;
 }
@@ -54,7 +54,7 @@ header {
     font-size: 2.0rem;
   }
 
-  .menus-wrap > * {
+  .menu-wrap > * {
     margin-left: 40px;
   }
 }
@@ -64,8 +64,14 @@ header {
     font-size: 2.0rem;
   }
 
-  .menus-wrap > * {
+  .menu-wrap > * {
     margin-left: 40px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  header {
+    background-color: #FFF;
   }
 }
 
@@ -78,8 +84,20 @@ header {
     padding: 20px 5% 5px 5%;
   }
 
-  .menus-wrap > * {
+  .menu-wrap > * {
     margin-left: 16px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  * {
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  * {
+    font-size: 1.0rem;
   }
 }
 </style>
