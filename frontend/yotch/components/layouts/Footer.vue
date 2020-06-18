@@ -13,7 +13,7 @@
         </li>
       </ul>
       <div class="address-wrap">
-        <p>mail:&nbsp;{{ address }}</p>
+        <p><i class="fas fa-envelope"></i>&nbsp;{{ address }}</p>
       </div>
 
       <ul class="social-wrap">
@@ -132,8 +132,13 @@ footer {
     font-size: 1.0rem;
   }
 
+  .menu-wrap > * {
+    padding: 0 10px;
+  }
+
   .social-icon {
     font-size: 1.4rem;
+    padding: 0 10px;
   }
 }
 

@@ -19,16 +19,16 @@ export default {
 </script>
 
 <style>
-common-header {
+#header {
   z-index: 100;
 }
 
-#header {
-  z-index: 10;
+#nuxt-body {
+  z-index: 0;
 }
 
-#nuxt-body, #footer {
-  z-index: 0;
+#footer {
+  z-index: 10;
 }
 
 * {

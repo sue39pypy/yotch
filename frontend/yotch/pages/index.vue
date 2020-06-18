@@ -7,8 +7,9 @@
         :style="{ backgroundImage: 'url(' + wallpaper.image_path + ')' }">
       </li>
     </ul>
-    <div class="title-wrapper">
-      <p>Yotch</p>
+    <div class="title-wrap">
+      <p>Hi, I'm Yotch</p>
+      <p class="title-description">料理、PG、日々のあれこれ</p>
     </div>
   </div>
 </template>
@@ -43,20 +44,27 @@ export default {
   text-align: center;
 }
 
-.title-wrapper {
-  font-family: Century;
-  font-size: 4.0rem;
+.title-wrap {
+  font-family: 'Lato', sans-serif;
+  font-size: 6.0rem;
   font-weight: bold;
-  position: absolute;
+  position: fixed;
   left: 50%;
   text-align: left;
-  top: 50%;
+  top: 65%;
+}
+
+.title-wrap .title-description {
+  font-size: 1.6rem;
+  font-weight: normal;
+  margin-top: 10px;
 }
 
 .wallpaper {
   background-position: center;
   background-size: cover;
   height: 100%;
+  position: fixed;
   width: 100vw;
 }
 
@@ -64,6 +72,23 @@ export default {
   height: 100vh;
   position: relative;
   width: 100%;
+}
+
+@media screen and (max-width: 480px) {
+  .title-wrap {
+    font-size: 3.0rem;
+  }
+
+  .title-wrap .title-description {
+    font-size: 0.8rem;
+    margin-top: 6px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .title-wrap {
+    left: 5%;
+  }
 }
 
 @media screen and (min-width: 1025px) {
