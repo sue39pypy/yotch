@@ -8,7 +8,7 @@
       </li>
     </ul>
     <div class="title-wrap">
-      <p>Hi, I'm Yotch</p>
+      <h2 class="title">Y Room</h2>
       <p class="title-description">料理、PG、日々のあれこれ</p>
     </div>
   </div>
@@ -44,9 +44,12 @@ export default {
   text-align: center;
 }
 
+.title {
+  font-size: 6.0rem;
+}
+
 .title-wrap {
   font-family: 'Lato', sans-serif;
-  font-size: 6.0rem;
   font-weight: bold;
   position: fixed;
   left: 50%;
@@ -64,7 +67,7 @@ export default {
   background-position: center;
   background-size: cover;
   height: 100%;
-  position: fixed;
+  position: absolute;
   width: 100vw;
 }
 
@@ -75,13 +78,19 @@ export default {
 }
 
 @media screen and (max-width: 480px) {
-  .title-wrap {
+  .title {
     font-size: 3.0rem;
   }
 
   .title-wrap .title-description {
     font-size: 0.8rem;
     margin-top: 6px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .title-wrap {
+    position: absolute;
   }
 }
 
@@ -92,6 +101,10 @@ export default {
 }
 
 @media screen and (min-width: 1025px) {
+  .title-wrap .title-description {
+    font-size: 0.9rem;
+  }
+
   .wallpaper {
     background-size: 100%;
     height: 80vh;
