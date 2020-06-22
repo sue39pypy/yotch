@@ -1,7 +1,11 @@
 <template>
   <header>
     <ul class="menu-wrap">
-      <li v-for="(menu, index) in menus" :key="'menu-' + index">
+      <li
+        v-for="(menu, index) in menus"
+        :key="`menu-${index}`"
+        :style="{ textDecoration: menu.path === $route.path ? 'underline' : 'none' }"
+      >
         <nuxt-link :to="menu.path" class="menu-link">{{ menu.title }}</nuxt-link>
       </li>
     </ul>

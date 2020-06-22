@@ -6,7 +6,7 @@ class WallpaperSerializer(serializers.ModelSerializer):
         model = Wallpaper
         fields = (
             'name',
-            'image'
+            'image_path'
         )
 
 class WallpaperListSerializer(serializers.ModelSerializer):

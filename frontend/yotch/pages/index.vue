@@ -3,8 +3,8 @@
     <ul class="wallpaper-wrap">
       <li v-for="(wallpaper, index) in wallpapers"
         class="wallpaper"
-        :key="'wallpaper-' + index"
-        :style="{ backgroundImage: 'url(' + wallpaper.image_path + ')' }">
+        :key="`wallpaper-${index}`"
+        :style="{ backgroundImage: `url(${wallpaper.image_path})` }">
       </li>
     </ul>
     <div class="title-wrap">

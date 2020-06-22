@@ -6,7 +6,7 @@
       <ul class="menu-wrap">
         <li
           v-for="(menu, index) in menus"
-          :key="'footer-menu-' + index"
+          :key="`footer-menu-${index}`"
           :style="{ textDecoration: menu.path === $route.path ? 'underline' : 'none' }"
         >
           <nuxt-link :to="menu.path">{{ menu.title }}</nuxt-link>
@@ -17,8 +17,8 @@
       </div>
 
       <ul class="social-wrap">
-        <li v-for="(social, index) in socials" :key="'social-' + index">
-          <a :href="social.path" target="_blank" rel="noopener noreferrer"><i :class="'social-icon ' + social.class"></i></a>
+        <li v-for="(social, index) in socials" :key="`social-${index}`">
+          <a :href="social.path" target="_blank" rel="noopener noreferrer"><i :class="`social-icon ${social.class}`"></i></a>
         </li>
       </ul>
 
