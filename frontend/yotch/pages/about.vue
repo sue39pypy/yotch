@@ -99,10 +99,6 @@ export default {
   width: 90%;
 }
 
-.main {
-  margin-bottom: 2px;
-}
-
 .slide {
   align-items: center;
   box-sizing: border-box;
@@ -149,12 +145,13 @@ export default {
 }
 
 .slide-title {
+  font-weight: bold;
   z-index: 100;
 }
 
 .slide-title p {
   color: #FFF;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
 }
 
 .slide-wrap {

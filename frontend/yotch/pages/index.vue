@@ -8,7 +8,7 @@
       </li>
     </ul>
     <div class="title-wrap">
-      <h2 class="title">Y Room</h2>
+      <Heading1>Y Room</Heading1>
       <p class="title-description">料理、PG、日々のあれこれ</p>
     </div>
   </div>
@@ -18,8 +18,6 @@
 import axios from 'axios'
 
 export default {
-  components: {
-  },
   data () {
     return {
       wallpapers: null
@@ -42,10 +40,6 @@ export default {
   min-height: 100vh;
   position: relative;
   text-align: center;
-}
-
-.title {
-  font-size: 6.0rem;
 }
 
 .title-wrap {
@@ -78,10 +72,6 @@ export default {
 }
 
 @media screen and (max-width: 480px) {
-  .title {
-    font-size: 3.0rem;
-  }
-
   .title-wrap .title-description {
     font-size: 0.8rem;
     margin-top: 6px;
