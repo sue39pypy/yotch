@@ -1,24 +1,23 @@
 <template>
   <div class="container">
-    <div>
-      <ul>
-        <li v-for="(wallpaper, index) in wallpapers"
-          :key="'wallpaper-' + index"
-          :style="{ backgroundImage: 'url(' + wallpaper.image + ')' }">
-        </li>
-      </ul>
+    <ul class="wallpaper-wrap">
+      <li v-for="(wallpaper, index) in wallpapers"
+        class="wallpaper"
+        :key="`wallpaper-${index}`"
+        :style="{ backgroundImage: `url(${wallpaper.image_path})` }">
+      </li>
+    </ul>
+    <div class="title-wrap">
+      <Heading1>Y Room</Heading1>
+      <p class="title-description">料理、PG、日々のあれこれ</p>
     </div>
   </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
 import axios from 'axios'
 
 export default {
-  components: {
-    Logo
-  },
   data () {
     return {
       wallpapers: null
@@ -32,35 +31,82 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .container {
-  margin: 0 auto;
-  min-height: 100vh;
+  align-items: center;
   display: flex;
   justify-content: center;
-  align-items: center;
+  margin: 0 auto;
+  min-height: 100vh;
+  position: relative;
   text-align: center;
 }
 
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
+.title-wrap {
+  font-family: 'Lato', sans-serif;
+  font-weight: bold;
+  position: fixed;
+  left: 50%;
+  text-align: left;
+  top: 65%;
 }
 
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
+.title-wrap .title-description {
+  font-size: 1.6rem;
+  font-weight: normal;
+  margin-top: 10px;
 }
 
-.links {
-  padding-top: 15px;
+.wallpaper {
+  background-position: center;
+  background-size: cover;
+  height: 100%;
+  position: absolute;
+  width: 100vw;
+}
+
+.wallpaper-wrap {
+  height: 100vh;
+  position: relative;
+  width: 100%;
+}
+
+@media screen and (max-width: 480px) {
+  .title-wrap .title-description {
+    font-size: 0.8rem;
+    margin-top: 6px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .title-wrap {
+    position: absolute;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .title-wrap {
+    left: 5%;
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  .title-wrap .title-description {
+    font-size: 0.9rem;
+  }
+
+  .wallpaper {
+    background-size: 100%;
+    height: 80vh;
+    left: 0;
+    position: absolute;
+    top: 70px;
+    width: 60vh;
+  }
+
+  .wallpaper-wrap {
+    margin: 0 auto;
+    width: 80vw;
+  }
 }
 </style>

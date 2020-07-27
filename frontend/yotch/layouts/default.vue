@@ -1,10 +1,48 @@
 <template>
   <div>
-    <nuxt />
+    <common-header id="header" />
+    <nuxt id="nuxt-body" />
+    <common-footer id="footer" />
   </div>
 </template>
 
+<script>
+import CommonFooter from '~/components/layouts/Footer.vue'
+import CommonHeader from '~/components/layouts/Header.vue'
+
+export default {
+  components: {
+    CommonFooter,
+    CommonHeader
+  }
+}
+</script>
+
 <style>
+#header {
+  z-index: 100;
+}
+
+#nuxt-body {
+  z-index: 0;
+}
+
+#footer {
+  z-index: 10;
+}
+
+* {
+  color: #000;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 html {
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -27,34 +65,5 @@ ul {
 *:after {
   box-sizing: border-box;
   margin: 0;
-}
-
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
-}
-
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
-}
-
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
-
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
 }
 </style>
