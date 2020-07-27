@@ -16,4 +16,7 @@ export default {
 </script>
 
 <style scoped>
+.heading2 {
+  font-size: 3.0rem;
+}
 </style>
