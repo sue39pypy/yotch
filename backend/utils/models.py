@@ -1,17 +1,14 @@
 from django.conf import settings
+from django.db import models
 from django.utils.safestring import mark_safe
 import logging
-import sys
-
-from django.db import models
-
 import os
 import sys
 import uuid
 
 def get_image_path(instance, filename):
     """画像パスの設定
-    :param instance: Wallpaperインスタンス
+    :param instance: インスタンス
     :param filename: 元ファイル名
     :return: 設定したファイル名含む該当画像ファイルパス
     """
@@ -28,38 +25,26 @@ def get_image_path(instance, filename):
                       + sys.exc_info()
         logger.error(log_message)
 
-
-class Wallpaper(models.Model):
-    name = models.CharField(
-        max_length=50,
-        verbose_name='壁紙名称'
-    )
+class ImageModel(models.Model):
+    # スライド画像
     image = models.ImageField(
         upload_to=get_image_path,
-        verbose_name='壁紙画像'
+        verbose_name='画像'
     )
-    caption = models.TextField(
-        verbose_name='壁紙説明'
-    )
-    created_at = models.DateTimeField(
-        auto_now_add=True,
-        verbose_name='作成日時'
-    )
-    updated_at = models.DateTimeField(
-        auto_now=True,
-        verbose_name='更新日時'
-    )
+
+    class Meta:
+        abstract = True
 
     def get_image_source(self):
         """画像ファイルアップロードパスを取得
-        :param self: Wallpaperインスタンス
+        :param self: インスタンス
         :return    : 画像ファイルアップロードパス
         """
         return os.path.join('/', settings.MEDIA_URL, str(self.image))
 
-    def admin_wallpaper_image(self):
+    def admin_image(self):
         """adminのリスト表示ページのサムネイルをスタイル調整して表示
-        :param self: Wallpaperインスタンス
+        :param self: インスタンス
         :return    : mark_safeメソッド実行結果
         """
         if self.image:
@@ -67,11 +52,5 @@ class Wallpaper(models.Model):
         else:
             return 'no image'
 
-    admin_wallpaper_image.short_description = 'Image'
-    admin_wallpaper_image.allow_tags = True
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        ordering = ('-created_at',)
+    admin_image.short_description = 'Image'
+    admin_image.allow_tags = True

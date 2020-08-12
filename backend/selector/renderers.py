@@ -4,7 +4,7 @@ from rest_framework.renderers import JSONRenderer
 import logging
 import sys
 
-class WallpaperJSONRenderer(JSONRenderer):
+class SelectorJSONRenderer(JSONRenderer):
     charset = 'utf-8'
 
     def render(self, data, accepted_media_type=None, renderer_context=None):
@@ -12,7 +12,7 @@ class WallpaperJSONRenderer(JSONRenderer):
             logger = logging.getLogger('')
             return json.dumps({
                 'status': 0,
-                'wallpapers': data,
+                'selectors': data,
                 'message': ''
             },ensure_ascii=False)
         except:
@@ -22,6 +22,6 @@ class WallpaperJSONRenderer(JSONRenderer):
             logger.error(log_message)
             return json.dumps({
                 'status': 2,
-                'wallpapers': [],
+                'selectors': [],
                 'message': function_name + ' is failed'
             })
