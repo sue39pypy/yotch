@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator
 import logging
 from django.db import models
@@ -7,6 +8,10 @@ import sys
 import uuid
 
 from utils.models import ImageModel
+
+def check_flg_item(value):
+    if value != 0 and value != 1:
+        raise ValidationError('入力が不適切です。')
 
 def get_image_path(instance, filename):
     """画像パスの設定
@@ -28,12 +33,27 @@ def get_image_path(instance, filename):
         logger.error(log_message)
 
 class Interior(ImageModel):
-    # スライドタイトル
+    """
+    Aboutページ内Interiorコンテンツ表示項目
+
+    properties
+    title : str
+        イメージタイトル
+    image : str
+        イメージ参照パス
+    rank : int
+        ランク（表示順序等に利用）
+    description : str
+        キャプション（現時点では用途なし）
+    created_at : datetime
+        作成日時
+    updated_at : datetime
+        更新日時
+    """
     title = models.CharField(
         max_length=20,
         verbose_name='タイトル'
     )
-    # ランク（表示順序等に利用）
     rank = models.IntegerField(
         verbose_name='ランク',
         blank=False,
@@ -41,7 +61,6 @@ class Interior(ImageModel):
         default=0,
         validators=[MinValueValidator(0)]
     )
-    # キャプション（現時点では用途なし）
     description = models.TextField(
         verbose_name='概要',
         blank=True,
@@ -64,12 +83,27 @@ class Interior(ImageModel):
         ordering = ('rank',)
 
 class Slide(ImageModel):
-    # スライドタイトル
+    """
+    Aboutページ内コンテンツスライドクラス
+
+    properties
+    title : str
+        スライドタイトル
+    image : str
+        イメージ参照パス
+    rank : int
+        ランク（表示順序等に利用）
+    description : str
+        キャプション
+    created_at : datetime
+        作成日時
+    updated_at : datetime
+        更新日時
+    """
     title = models.CharField(
         max_length=20,
         verbose_name='タイトル'
     )
-    # ランク（表示順序等に利用）
     rank = models.IntegerField(
         verbose_name='ランク',
         blank=False,
@@ -77,7 +111,6 @@ class Slide(ImageModel):
         default=0,
         validators=[MinValueValidator(0)]
     )
-    # キャプション（現時点では用途なし）
     description = models.TextField(
         verbose_name='概要',
         blank=True,
@@ -100,6 +133,21 @@ class Slide(ImageModel):
         ordering = ('rank',)
 
 class Wallpaper(ImageModel):
+    """
+    ページ内に表示する壁紙クラス
+
+    properties
+    name : str
+        スライドタイトル
+    image : str
+        イメージ参照パス
+    caption : str
+        キャプション
+    created_at : datetime
+        作成日時
+    updated_at : datetime
+        更新日時
+    """
     name = models.CharField(
         max_length=50,
         verbose_name='壁紙名称'

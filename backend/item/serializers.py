@@ -1,7 +1,5 @@
 from rest_framework import serializers
-from .models import Interior
-from .models import Slide
-from .models import Wallpaper
+from .models import Interior, Slide, Wallpaper
 
 class InteriorSerializer(serializers.ModelSerializer):
     class Meta:
