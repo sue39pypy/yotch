@@ -29,6 +29,8 @@ class ImageModel(models.Model):
     # スライド画像
     image = models.ImageField(
         upload_to=get_image_path,
+        blank=True,
+        null=True,
         verbose_name='画像'
     )
 

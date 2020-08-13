@@ -1,16 +1,19 @@
 from django.contrib import admin
+
 from .models import Interior
 from .models import Slide
 from .models import Wallpaper
 
 class InteriorAdmin(admin.ModelAdmin):
     list_display = ('title', 'image', 'rank', 'admin_image')
+    ordering = ('rank', )
 
     def _meta(self, row):
         return ','.join([x.title for x in row.meta.all()])
 
 class SlideAdmin(admin.ModelAdmin):
     list_display = ('title', 'image', 'rank', 'admin_image')
+    ordering = ('rank', )
 
     def _meta(self, row):
         return ','.join([x.title for x in row.meta.all()])

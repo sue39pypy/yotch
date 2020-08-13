@@ -12,7 +12,7 @@ class InteriorJSONRenderer(JSONRenderer):
             logger = logging.getLogger('')
             return json.dumps({
                 'status': 0,
-                'interior': data,
+                'interiors': data,
                 'message': ''
             },ensure_ascii=False)
         except:
@@ -22,7 +22,7 @@ class InteriorJSONRenderer(JSONRenderer):
             logger.error(log_message)
             return json.dumps({
                 'status': 2,
-                'interior': [],
+                'interiors': [],
                 'message': function_name + ' is failed'
             })
 
