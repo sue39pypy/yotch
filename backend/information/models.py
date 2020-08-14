@@ -37,7 +37,7 @@ class Information(models.Model):
         verbose_name='サービス名称'
     )
     type = models.CharField(
-        max_length=255,
+        max_length=50,
         verbose_name='情報種別'
     )
     value = models.CharField(
