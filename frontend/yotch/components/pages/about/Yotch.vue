@@ -1,11 +1,13 @@
 <template>
-  <div class="contents-container">
-    <Heading2>Yotch</Heading2>
-    <div class="content-wrap">
+  <div class="content-container">
+    <Heading2>{{ content.title }}</Heading2>
+    <div class="detail-wrap">
       <div class="description-wrap">
-        <p>広島でPGをしています。</p>
-        <p>これまでの業務の中で、行政システムの保守・改修やコンサルタント、webサイト製作を担当してきました。</p>
-        <p>現在は主にwebアプリケーションの開発業務に従事しています。</p>
+        <p v-for="(line, index) in content.description_converted"
+          :key="'content-description-' + index"
+        >
+          {{ line }}
+        </p>
       </div>
       <div class="info-wrap">
         <div class="info-row">
@@ -35,8 +37,8 @@
           <div class="info-header">各種SNS：</div>
           <div class="info-data">
             <ul class="social-wrap">
-              <li v-for="(social, index) in socials" :key="`social-${index}`">
-                <a :href="social.path" target="_blank" rel="noopener noreferrer"><i :class="`social-icon ${social.class}`"></i></a>
+              <li v-for="(account, index) in accounts" :key="`account-${index}`">
+                <a :href="account.url" target="_blank" rel="noopener noreferrer"><i :class="`social-icon ${account.icon}`"></i></a>
               </li>
             </ul>
           </div>
@@ -49,15 +51,18 @@
 <script>
 export default {
   name: 'AboutYotch',
+  props: [
+    'content'
+  ],
   data () {
     return {
-      socials: [
-        { name: 'Twitter', path: 'https://twitter.com/dwde10wy', class: 'fab fa-twitter' },
-        { name: 'Instagram', path: 'https://www.instagram.com/youki_pv/', class: 'fab fa-instagram' },
-        { name: 'facebook', path: 'https://www.facebook.com/profile.php?id=100003161367890', class: 'fab fa-facebook-f' },
-        { name: 'Github', path: 'https://github.com/sue39pypy', class: 'fab fa-github' },
-        { name: 'Spotify', path: 'https://open.spotify.com/user/1onk9oj4f2zdl1ol45yitessp', class: 'fab fa-spotify' },
-        { name: 'LinkedIn', path: 'https://www.linkedin.com/in/%E6%B9%A7%E7%94%9F-%E5%90%89%E5%B2%A1-4616051a9/', class: 'fab fa-linkedin' }
+      accounts: [
+        { service_name: 'Twitter', url: 'https://twitter.com/dwde10wy', icon: 'fab fa-twitter' },
+        { service_name: 'Instagram', url: 'https://www.instagram.com/youki_pv/', icon: 'fab fa-instagram' },
+        { service_name: 'facebook', url: 'https://www.facebook.com/profile.php?id=100003161367890', icon: 'fab fa-facebook-f' },
+        { service_name: 'Github', url: 'https://github.com/sue39pypy', icon: 'fab fa-github' },
+        { service_name: 'Spotify', url: 'https://open.spotify.com/user/1onk9oj4f2zdl1ol45yitessp', icon: 'fab fa-spotify' },
+        { service_name: 'LinkedIn', url: 'https://www.linkedin.com/in/%E6%B9%A7%E7%94%9F-%E5%90%89%E5%B2%A1-4616051a9/', icon: 'fab fa-linkedin' }
       ]
     }
   }
@@ -70,7 +75,7 @@ export default {
   font-size: 0.9rem;
 }
 
-.contents-container {
+.content-container {
   margin: 0 auto;
   width: 100%;
 }
@@ -118,7 +123,7 @@ export default {
 }
 
 @media screen and (max-width: 767px) {
-  .contents-container {
+  .content-container {
     width: 90%;
   }
 
@@ -135,7 +140,7 @@ export default {
   }
 
   .social-wrap li a i {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
   }
 }
 </style>

@@ -23,7 +23,7 @@
       >
         <div
           :class="['slide', 'slide--thumbnails', `slide--${index}`]"
-          @click="$refs.thumbnails.goTo(index); adjustContentWrapHeight(index);"
+          @click="slidesContent(index)"
           :key="`thumbnail-${index}`"
           v-for="(slide, index) in slides"
         >
@@ -39,13 +39,17 @@
         class="contents"
         :options="options3"
         ref="contents"
+        :swipe-distance="100000"
       >
         <div
           :class="['slide', 'slide--contents', `slide--${index}`]"
           :key="'content-' + index"
           v-for="(content, index) in contents"
         >
-          <component :is="content" />
+          <component
+            :is="content"
+            :content="slides[index]"
+          />
         </div>
       </agile>
     </div>
@@ -55,6 +59,7 @@
 <script>
 import { VueAgile } from 'vue-agile'
 
+import AboutInterior from '~/components/pages/about/Interior.vue'
 import AboutSkills from '~/components/pages/about/Skills.vue'
 import AboutYotch from '~/components/pages/about/Yotch.vue'
 
@@ -62,6 +67,7 @@ export default {
   name: 'About',
   components: {
     agile: VueAgile,
+    AboutInterior,
     AboutSkills,
     AboutYotch
   },
@@ -70,11 +76,14 @@ export default {
       asNavFor1: [],
       asNavFor2: [],
       asNavFor3: [],
+      contentData: null,
       contents: [
         'about-yotch',
-        'about-skills'
+        'about-skills',
+        'about-interior'
       ],
       heights: [],
+      interiors: null,
       options1: {
         dots: false,
         fade: true,
@@ -107,17 +116,29 @@ export default {
         centerMode: false,
         dots: false,
         navButtons: false,
-        slidesToShow: 1,
-        swipeDistance: 1000000
+        slidesToShow: 1
       },
       slides: null
     }
   },
   async asyncData({ $axios }) {
+    // コンテンツスライド内にpropsとして渡すデータの配列
+    let contentData = []
+
     // カルーセルの要素をAPIで取得
-    const url = "/api/slides"
-    const response = await $axios.get(url)
-    return { slides: response.data.slides }
+    let url = "/api/slides"
+    const slidesResponse = await $axios.get(url)
+    contentData.push(slidesResponse.data.slides)
+
+    // Interior表示項目をAPIで取得
+    url = "/api/interiors/"
+    const interiorsResponse = await $axios.get(url)
+    contentData.push(interiorsResponse.data.interiors)
+
+    return {
+      interiors: interiorsResponse.data.interiors,
+      slides: slidesResponse.data.slides
+    }
   },
   methods: {
     // ページコンテンツの高さを子要素の高さに調節
@@ -126,6 +147,13 @@ export default {
       let agileSlidesRegular = document.querySelector('.contents .agile__list .agile__track .agile__slides--regular')
       agileList.style.height = this.heights[index] + 'px'
       agileSlidesRegular.style.height = this.heights[index] + 'px'
+    },
+    // Vue-Agileスライドの切り替え
+    slidesContent (index) {
+      // スライドの切り替え
+      this.$refs.thumbnails.goTo(index);
+      // ページコンテンツ領域の高さを子要素の高さに調整
+      this.adjustContentWrapHeight(index)
     }
   },
   mounted () {
