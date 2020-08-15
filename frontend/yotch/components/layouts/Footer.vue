@@ -17,8 +17,8 @@
       </div>
 
       <ul class="social-wrap">
-        <li v-for="(social, index) in socials" :key="`social-${index}`">
-          <a :href="social.path" target="_blank" rel="noopener noreferrer"><i :class="`social-icon ${social.class}`"></i></a>
+        <li v-for="(account, index) in accounts" :key="`social-${index}`">
+          <a :href="account.url" target="_blank" rel="noopener noreferrer"><i :class="`social-icon ${account.icon}`"></i></a>
         </li>
       </ul>
 
@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'CommonFooter',
   data () {
@@ -41,13 +43,18 @@ export default {
         { title: 'Blog', path: '/blogs' },
         { title: 'Works', path: '/works' },
       ],
-      socials: [
-        { name: 'Twitter', path: 'https://twitter.com/dwde10wy', class: 'fab fa-twitter' },
-        { name: 'Instagram', path: 'https://www.instagram.com/youki_pv/', class: 'fab fa-instagram' },
-        { name: 'facebook', path: 'https://www.facebook.com/profile.php?id=100003161367890', class: 'fab fa-facebook-f' },
-        { name: 'Github', path: 'https://github.com/sue39pypy', class: 'fab fa-github' }
-      ]
+      accounts: []
     }
+  },
+  computed: {
+    ...mapGetters('information', [
+      'getAccounts',
+      'getProfile'
+    ])
+  },
+  created () {
+    // storeからアカウント情報を取得
+    this.accounts = this.getAccounts
   }
 }
 </script>

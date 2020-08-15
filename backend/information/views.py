@@ -36,6 +36,10 @@ class InformationSpecifiedTypeListApiView(ListAPIView):
         try:
             logger = logging.getLogger('')
             logger.info(self.request.GET)
-            return Information.objects.filter(type=self.request.GET.get('type'))
+
+            if not self.request.GET.get('is_for_contact'):
+                return Information.objects.filter(type=self.request.GET.get('type'))
+            else:
+                return Information.objects.filter(type=self.request.GET.get('type'), is_for_contact=self.request.GET.get('is_for_contact'))
         except:
             logger.error('情報取得処理に失敗しました。')
