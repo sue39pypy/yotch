@@ -37,7 +37,7 @@
           <div class="info-header">各種SNS：</div>
           <div class="info-data">
             <ul class="social-wrap">
-              <li v-for="(account, index) in accounts" :key="`account-${index}`">
+              <li v-for="(account, index) in contentProps" :key="`account-${index}`">
                 <a :href="account.url" target="_blank" rel="noopener noreferrer"><i :class="`social-icon ${account.icon}`"></i></a>
               </li>
             </ul>
@@ -52,18 +52,12 @@
 export default {
   name: 'AboutYotch',
   props: [
-    'content'
+    'content',
+    'contentProps'
   ],
   data () {
     return {
-      accounts: [
-        { service_name: 'Twitter', url: 'https://twitter.com/dwde10wy', icon: 'fab fa-twitter' },
-        { service_name: 'Instagram', url: 'https://www.instagram.com/youki_pv/', icon: 'fab fa-instagram' },
-        { service_name: 'facebook', url: 'https://www.facebook.com/profile.php?id=100003161367890', icon: 'fab fa-facebook-f' },
-        { service_name: 'Github', url: 'https://github.com/sue39pypy', icon: 'fab fa-github' },
-        { service_name: 'Spotify', url: 'https://open.spotify.com/user/1onk9oj4f2zdl1ol45yitessp', icon: 'fab fa-spotify' },
-        { service_name: 'LinkedIn', url: 'https://www.linkedin.com/in/%E6%B9%A7%E7%94%9F-%E5%90%89%E5%B2%A1-4616051a9/', icon: 'fab fa-linkedin' }
-      ]
+      accounts: []
     }
   }
 }

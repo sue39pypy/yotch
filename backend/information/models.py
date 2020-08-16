@@ -53,7 +53,7 @@ class Information(models.Model):
         max_length=50,
         blank=True,
         null=True,
-        verbose_name='font-awesomeクラス'
+        verbose_name='アイコンクラス'
     )
     is_for_contact = models.IntegerField(
         default=0,
