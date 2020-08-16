@@ -49,6 +49,7 @@
           <component
             :is="content"
             :content="slides[index]"
+            :contentProps="contentsProps[index]"
           />
         </div>
       </agile>
@@ -76,7 +77,7 @@ export default {
       asNavFor1: [],
       asNavFor2: [],
       asNavFor3: [],
-      contentData: null,
+      contentsProps: null,
       contents: [
         'about-yotch',
         'about-skills',
@@ -122,22 +123,51 @@ export default {
     }
   },
   async asyncData({ $axios }) {
-    // コンテンツスライド内にpropsとして渡すデータの配列
-    let contentData = []
+    // コンテンツ子コンポーネントに渡すpropsの配列を作成
+    let contentsProps = []
 
     // カルーセルの要素をAPIで取得
     let url = "/api/slides"
-    const slidesResponse = await $axios.get(url)
-    contentData.push(slidesResponse.data.slides)
+    let response = await $axios.get(url)
+    let slides = response.data.slides
 
-    // Interior表示項目をAPIで取得
-    url = "/api/interiors/"
-    const interiorsResponse = await $axios.get(url)
-    contentData.push(interiorsResponse.data.interiors)
+    // スライドに応じたpropsを生成
+    let key = ''
+    for (let i = 0; i < slides.length; i++) {
+      switch (slides[i]['title']) {
+        case 'Yotch':
+          // Yotchコンテンツ用の管理情報を取得
+          url = '/api/informations/?type=account'
+          response = await $axios.get(url)
+          key = 'informations'
+          break
+        case 'Skills':
+          // Skillsコンテンツ用の管理情報を取得
+          url = '/api/skills'
+          key = 'skills'
+          break
+        case 'Interior':
+          url = '/api/interiors'
+          key = 'interiors'
+          break
+        case 'Cooking':
+          url = '/api/dishes'
+          key = 'dishes'
+          break
+        default:
+          url = ''
+          key = ''
+      }
+      if (url) {
+        response = await $axios.get(url)
+        contentsProps.push(response.data[key])
+      }
+    }
+    console.log(contentsProps)
 
     return {
-      interiors: interiorsResponse.data.interiors,
-      slides: slidesResponse.data.slides
+      contentsProps: contentsProps,
+      slides: slides
     }
   },
   methods: {

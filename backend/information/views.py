@@ -35,11 +35,22 @@ class InformationSpecifiedTypeListApiView(ListAPIView):
     def get_queryset(self):
         try:
             logger = logging.getLogger('')
-            logger.info(self.request.GET)
 
-            if not self.request.GET.get('is_for_contact'):
-                return Information.objects.filter(type=self.request.GET.get('type'))
+            if self.request.GET.get('type'):
+                queryset_type = Information.objects.filter(type=self.request.GET.get('type'))
             else:
-                return Information.objects.filter(type=self.request.GET.get('type'), is_for_contact=self.request.GET.get('is_for_contact'))
+                queryset_type = Information.objects.all()
+
+            logging.info(queryset_type)
+
+            if self.request.GET.get('is_for_contact'):
+                queryset_is_for_contact = Information.objects.filter(is_for_contact=self.request.GET.get('is_for_contact'))
+            else:
+                queryset_is_for_contact = Information.objects.all()
+
+            logging.info(queryset_is_for_contact)
+            queryset = queryset_type & queryset_is_for_contact
+            logging.info(queryset)
+            return queryset
         except:
             logger.error('情報取得処理に失敗しました。')
