@@ -60,6 +60,7 @@
 <script>
 import { VueAgile } from 'vue-agile'
 
+import AboutCooking from '~/components/pages/about/Cooking.vue'
 import AboutInterior from '~/components/pages/about/Interior.vue'
 import AboutSkills from '~/components/pages/about/Skills.vue'
 import AboutYotch from '~/components/pages/about/Yotch.vue'
@@ -68,9 +69,10 @@ export default {
   name: 'About',
   components: {
     agile: VueAgile,
+    AboutCooking,
     AboutInterior,
     AboutSkills,
-    AboutYotch
+    AboutYotch,
   },
   data () {
     return {
@@ -81,7 +83,8 @@ export default {
       contents: [
         'about-yotch',
         'about-skills',
-        'about-interior'
+        'about-interior',
+        'about-cooking'
       ],
       heights: [],
       interiors: null,
