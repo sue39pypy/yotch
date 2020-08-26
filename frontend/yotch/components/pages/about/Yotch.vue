@@ -94,8 +94,11 @@ export default {
   word-break: break-all;
 }
 
-.info-wrap {
+.info-header {
   font-weight: bold;
+}
+
+.info-wrap {
   margin-top: 40px;
 }
 

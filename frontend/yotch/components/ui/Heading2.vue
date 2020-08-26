@@ -19,4 +19,10 @@ export default {
 .heading2 {
   font-size: 3.0rem;
 }
+
+@media screen and (max-width:767px) {
+  .heading2 {
+    font-size: 2.4rem;
+  }
+}
 </style>

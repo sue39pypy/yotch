@@ -71,7 +71,7 @@ export default {
 }
 
 .dish-wrap li {
-  padding: 4px;
+  padding: 1px;
   width: 33%;
 }
 

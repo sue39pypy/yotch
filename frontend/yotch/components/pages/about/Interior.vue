@@ -11,18 +11,17 @@
         </p>
       </div>
 
-      <div class="images-wrap">
-        <div
+      <ul class="images-wrap">
+        <li
           v-for="(interior, index) in contentProps"
           :key="'interior-' + index"
-          :class="['image', 'image' + index]"
-          :style="{ backgroundImage: 'url(' + interior.image_path + ')' }"
+          class="interior"
         >
-          <div class="image-mask">
-            {{ interior.title }}
-          </div>
-        </div>
-      </div>
+          <img class="interior-image" :src="interior.image_path">
+          <dev class="mask"></dev>
+          <dev class="title">{{ interior.title }}</dev>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -56,29 +55,56 @@ export default {
   margin-top: 40px;
 }
 
-.image {
+.interior {
   background-position: center;
   background-size: cover;
 }
 
-.image0, .image1, .image2 {
-  height: 450px;
-  width: 33%;
-}
-
-.image3, .image4 {
-  height: 300px;
-  width: 50%;
-}
-
 .images-wrap {
-  display: flex;
-  display: -ms-flexbox;
-  display: -webkit-box;
-  flex-wrap: wrap;
+  column-count: 2;
+  column-gap: 0;
   height: auto;
-  align-content: space-between;
+  margin: 40px auto 0;
   width: 100%;
+}
+
+.images-wrap .interior {
+  -webkit-column-break-inside: avoid;
+  padding: 1px;
+  page-break-inside: avoid;
+  position: relative;
+  break-inside: avoid;
+}
+
+.images-wrap .interior img {
+  height: auto;
+  vertical-align: top;
+  width: 100%;
+  z-index: 1;
+}
+
+.images-wrap .interior .mask {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, .7));
+  background-position: 100% 50%;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  height: 100%;
+  left: 0;
+  opacity: .5;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+.images-wrap .interior .title {
+  bottom: 0;
+  color: #FFF;
+  font-size: 1.2rem;
+  left: 0;
+  padding: 10px;
+  position: absolute;
+  z-index: 20;
 }
 
 @media screen and (max-width: 767px) {
