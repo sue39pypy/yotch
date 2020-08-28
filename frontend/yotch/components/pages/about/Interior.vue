@@ -18,8 +18,8 @@
           class="interior"
         >
           <img class="interior-image" :src="interior.image_path">
-          <dev class="mask"></dev>
-          <dev class="title">{{ interior.title }}</dev>
+          <!-- <dev class="mask"></dev> -->
+          <!-- <dev class="title">{{ interior.title }}</dev> -->
         </li>
       </ul>
     </div>
@@ -70,7 +70,7 @@ export default {
 
 .images-wrap .interior {
   -webkit-column-break-inside: avoid;
-  padding: 1px;
+  padding: 2px;
   page-break-inside: avoid;
   position: relative;
   break-inside: avoid;
@@ -84,13 +84,12 @@ export default {
 }
 
 .images-wrap .interior .mask {
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, .7));
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, .3));
   background-position: 100% 50%;
   background-repeat: no-repeat;
   background-size: 100%;
   height: 100%;
   left: 0;
-  opacity: .5;
   position: absolute;
   top: 0;
   width: 100%;
@@ -102,6 +101,7 @@ export default {
   color: #FFF;
   font-size: 1.2rem;
   left: 0;
+  opacity: .8;
   padding: 10px;
   position: absolute;
   z-index: 20;
@@ -110,6 +110,15 @@ export default {
 @media screen and (max-width: 767px) {
   .content-container {
     width: 90%;
+  }
+
+  .description-wrap p {
+    font-size: .9rem;
+  }
+
+  .images-wrap .interior .title {
+    font-size: 0.8rem;
+    padding: 5px;
   }
 }
 </style>

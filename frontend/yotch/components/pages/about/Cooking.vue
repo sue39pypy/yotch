@@ -99,6 +99,10 @@ export default {
     width: 90%;
   }
 
+  .description-wrap p {
+    font-size: .9rem;
+  }
+
   .dish-wrap li {
     padding: 1px;
   }

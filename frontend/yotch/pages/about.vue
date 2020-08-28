@@ -110,7 +110,7 @@ export default {
           {
             breakpoint: 1025,
             settings: {
-              slidesToShow: 3
+              slidesToShow: 5
             }
           }
         ]
@@ -225,7 +225,7 @@ export default {
 
 .container {
   margin: 0 auto;
-  max-width: 1024px;
+  max-width: 1030px;
   min-height: 100vh;
   width: 90%;
 }
@@ -289,6 +289,7 @@ export default {
 .slide-title {
   font-weight: bold;
   left: 50%;
+  opacity: .8;
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -323,12 +324,13 @@ export default {
 
 @media screen and (min-width: 1025px) {
   .contents-wrap {
+    margin-top: 50px;
     padding: 0 0 100px;
   }
 
   .slide-wrap {
     margin: 100px 0 0 auto;
-    width: 50%;
+    width: 100%;
   }
 }
 </style>

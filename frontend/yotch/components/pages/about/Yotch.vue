@@ -120,6 +120,10 @@ export default {
 }
 
 @media screen and (max-width: 767px) {
+  * {
+    font-size: .9rem;
+  }
+  
   .content-container {
     width: 90%;
   }
