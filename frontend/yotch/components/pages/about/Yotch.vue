@@ -94,8 +94,11 @@ export default {
   word-break: break-all;
 }
 
-.info-wrap {
+.info-header {
   font-weight: bold;
+}
+
+.info-wrap {
   margin-top: 40px;
 }
 
@@ -117,6 +120,10 @@ export default {
 }
 
 @media screen and (max-width: 767px) {
+  * {
+    font-size: .9rem;
+  }
+  
   .content-container {
     width: 90%;
   }
