@@ -3,6 +3,7 @@
     <div class="footer-mask"></div>
 
     <div class="footer-content-wrap">
+      <arrow />
       <ul class="menu-wrap">
         <li
           v-for="(menu, index) in menus"
@@ -32,8 +33,13 @@
 <script>
 import { mapGetters } from 'vuex'
 
+import Arrow from '~/components/ui/Arrow.vue'
+
 export default {
   name: 'CommonFooter',
+  components: {
+    Arrow
+  },
   data () {
     return {
       address: 'yotch.youki.you@gmail.com',
@@ -70,7 +76,7 @@ footer {
   background-position: 50% calc(50% - 50px);
   background-size: cover;
   height: auto;
-  min-height: 280px;
+  min-height: 305px;
   position: relative;
   width: 100vw;
   z-index: 0;
@@ -85,7 +91,7 @@ footer {
   height: auto;
   left: 0;
   position: absolute;
-  padding: 40px;
+  padding: 10px 40px 40px;
   top: 0;
   width: 100%;
   z-index: 10;

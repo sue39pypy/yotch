@@ -1,34 +1,12 @@
 <template>
   <div class="content-container">
     <Heading2>{{ content.title }}</Heading2>
-    <div class="detail-wrap">
-
-      <div class="description-wrap">
-        <p v-for="(line, index) in content.description_converted"
-          :key="'content-description-' + index"
-        >
-          {{ line }}
-        </p>
-      </div>
-
-      <ul class="images-wrap">
-        <li
-          v-for="(interior, index) in contentProps"
-          :key="'interior-' + index"
-          class="interior"
-        >
-          <img class="interior-image" :src="interior.image_path">
-          <!-- <dev class="mask"></dev> -->
-          <!-- <dev class="title">{{ interior.title }}</dev> -->
-        </li>
-      </ul>
-    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'AboutInterior',
+  name: 'AboutCareer',
   props: [
     'content',
     'contentProps'
@@ -114,6 +92,10 @@ export default {
 
   .description-wrap p {
     font-size: .9rem;
+  }
+
+  .images-wrap .interior {
+    padding: 1px;
   }
 
   .images-wrap .interior .title {

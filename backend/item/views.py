@@ -3,9 +3,9 @@ from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
-from .models import Dish, Interior, Skill, Slide, Wallpaper
-from .renderers import DishJSONRenderer, InteriorJSONRenderer, SkillJSONRenderer, SlideJSONRenderer, WallpaperJSONRenderer
-from .serializers import DishListSerializer, DishSerializer, InteriorListSerializer, InteriorSerializer, SkillListSerializer, SkillSerializer, SlideListSerializer, SlideSerializer, WallpaperListSerializer, WallpaperSerializer
+from .models import Dish, Skill, Slide, Wallpaper
+from .renderers import DishJSONRenderer, SkillJSONRenderer, SlideJSONRenderer, WallpaperJSONRenderer
+from .serializers import DishListSerializer, DishSerializer, SkillListSerializer, SkillSerializer, SlideListSerializer, SlideSerializer, WallpaperListSerializer, WallpaperSerializer
 
 class DishListAPIView(ListAPIView):
     model = Dish
@@ -20,26 +20,8 @@ class DishRetrieveAPIView(RetrieveAPIView):
     serializer_class = DishSerializer
 
     def retrieve(self, request, dish_id, *args, **kwargs):
-        dish = Interior.objects.get(id=dish_id)
+        dish = Dish.objects.get(id=dish_id)
         serializer = self.serializer_class(dish)
-
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-class InteriorListAPIView(ListAPIView):
-    model = Interior
-    queryset = Interior.objects.all().order_by('rank')
-    permission_classes = (AllowAny, )
-    renderer_classes = (InteriorJSONRenderer, )
-    serializer_class = InteriorListSerializer
-
-class InteriorRetrieveAPIView(RetrieveAPIView):
-    permission_classes = (AllowAny, )
-    renderer_classes = (InteriorJSONRenderer, )
-    serializer_class = InteriorSerializer
-
-    def retrieve(self, request, interior_id, *args, **kwargs):
-        interior = Interior.objects.get(id=interior_id)
-        serializer = self.serializer_class(interior)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
 

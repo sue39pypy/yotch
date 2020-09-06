@@ -83,56 +83,6 @@ class Dish(ImageModel):
     class Meta:
         ordering = ('rank',)
 
-class Interior(ImageModel):
-    """
-    Aboutページ内Interiorコンテンツ表示項目
-
-    properties
-    title : str
-        イメージタイトル
-    image : str
-        イメージ参照パス
-    rank : int
-        ランク（表示順序等に利用）
-    description : str
-        キャプション（現時点では用途なし）
-    created_at : datetime
-        作成日時
-    updated_at : datetime
-        更新日時
-    """
-    title = models.CharField(
-        max_length=20,
-        verbose_name='タイトル'
-    )
-    rank = models.IntegerField(
-        verbose_name='ランク',
-        blank=False,
-        null=False,
-        default=0,
-        validators=[MinValueValidator(0)]
-    )
-    description = models.TextField(
-        verbose_name='概要',
-        blank=True,
-        null=True,
-        max_length=1000
-    )
-    created_at = models.DateTimeField(
-        auto_now_add=True,
-        verbose_name='作成日時'
-    )
-    updated_at = models.DateTimeField(
-        auto_now=True,
-        verbose_name='更新日時'
-    )
-
-    def __str__(self):
-        return self.title
-
-    class Meta:
-        ordering = ('rank',)
-
 class Skill(models.Model):
     """
     Skill項目クラス

@@ -45,7 +45,7 @@ export default {
 .title-wrap {
   font-family: 'Lato', sans-serif;
   font-weight: bold;
-  position: fixed;
+  position: absolute;
   left: 50%;
   text-align: left;
   top: 65%;

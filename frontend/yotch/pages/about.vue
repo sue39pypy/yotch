@@ -49,7 +49,7 @@
           <component
             :is="content"
             :content="slides[index]"
-            :contentProps="contentsProps[index]"
+            :content-props="contentsProps[index]"
           />
         </div>
       </agile>
@@ -61,16 +61,15 @@
 import { VueAgile } from 'vue-agile'
 
 import AboutCooking from '~/components/pages/about/Cooking.vue'
-import AboutInterior from '~/components/pages/about/Interior.vue'
+import AboutCareer from '~/components/pages/about/Career.vue'
 import AboutSkills from '~/components/pages/about/Skills.vue'
 import AboutYotch from '~/components/pages/about/Yotch.vue'
 
 export default {
-  name: 'About',
   components: {
     agile: VueAgile,
+    AboutCareer,
     AboutCooking,
-    AboutInterior,
     AboutSkills,
     AboutYotch,
   },
@@ -82,12 +81,11 @@ export default {
       contentsProps: null,
       contents: [
         'about-yotch',
+        'about-career',
         'about-skills',
-        'about-interior',
         'about-cooking'
       ],
       heights: [],
-      interiors: null,
       options1: {
         dots: false,
         fade: true,
@@ -136,8 +134,13 @@ export default {
 
     // スライドに応じたpropsを生成
     let key = ''
+    let title = ''
+
     for (let i = 0; i < slides.length; i++) {
-      switch (slides[i]['title']) {
+      title = slides[i]['title']
+      console.log(title)
+
+      switch (title) {
         case 'Yotch':
           // Yotchコンテンツ用の管理情報を取得
           url = '/api/informations/?type=account'
@@ -148,10 +151,6 @@ export default {
           // Skillsコンテンツ用の管理情報を取得
           url = '/api/skills'
           key = 'skills'
-          break
-        case 'Interior':
-          url = '/api/interiors'
-          key = 'interiors'
           break
         case 'Cooking':
           url = '/api/dishes'
@@ -164,9 +163,10 @@ export default {
       if (url) {
         response = await $axios.get(url)
         contentsProps.push(response.data[key])
+      } else {
+        contentsProps.push('')
       }
     }
-    console.log(contentsProps)
 
     return {
       contentsProps: contentsProps,
@@ -204,7 +204,9 @@ export default {
       let tmp = []
       let height = 0
       for (let i = 0; i < contentsContainers.length; i++) {
+        console.log('height iterate index is ' + i)
         height = contentsContainers[i].firstElementChild.clientHeight
+        console.log(height)
         tmp.push(height)
       }
       this.heights = tmp
@@ -280,6 +282,7 @@ export default {
   height: 10vh;
   position: relative;
   transition: opacity .3s;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 .slide--thumbnails:hover {
@@ -311,7 +314,7 @@ export default {
   width: 100%;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 767px) {
   .container {
     width: 100%;
   }
