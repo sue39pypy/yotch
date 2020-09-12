@@ -170,8 +170,7 @@ class Slide(ImageModel):
     description = models.TextField(
         verbose_name='概要',
         blank=True,
-        null=True,
-        max_length=1000
+        null=True
     )
     created_at = models.DateTimeField(
         auto_now_add=True,

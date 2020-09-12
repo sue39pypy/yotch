@@ -1,6 +1,6 @@
 <template>
   <h2 class="heading2">
-    <span>
+    <span :style="{ color: fontColor ? fontColor: '#000'}">
       <slot />
     </span>
   </h2>
@@ -9,6 +9,9 @@
 <script>
 export default {
   name: 'Heading2',
+  props: {
+    fontColor: String
+  },
   data () {
     return {}
   }
