@@ -60,7 +60,6 @@
 <script>
 import { VueAgile } from 'vue-agile'
 
-import AboutCooking from '~/components/pages/about/Cooking.vue'
 import AboutCareer from '~/components/pages/about/Career.vue'
 import AboutSkills from '~/components/pages/about/Skills.vue'
 import AboutYotch from '~/components/pages/about/Yotch.vue'
@@ -69,7 +68,6 @@ export default {
   components: {
     agile: VueAgile,
     AboutCareer,
-    AboutCooking,
     AboutSkills,
     AboutYotch,
   },
@@ -82,8 +80,7 @@ export default {
       contents: [
         'about-yotch',
         'about-career',
-        'about-skills',
-        'about-cooking'
+        'about-skills'
       ],
       heights: [],
       options1: {
@@ -97,21 +94,7 @@ export default {
         centerMode: true,
         dots: false,
         navButtons: false,
-        slidesToShow: 3,
-        responsive: [
-          {
-            breakpoint: 767,
-            settings: {
-              slidesToShow: 5
-            }
-          },
-          {
-            breakpoint: 1025,
-            settings: {
-              slidesToShow: 5
-            }
-          }
-        ]
+        slidesToShow: 3
       },
       options3: {
         autoplay: false,
@@ -138,33 +121,37 @@ export default {
 
     for (let i = 0; i < slides.length; i++) {
       title = slides[i]['title']
-      console.log(title)
 
       switch (title) {
         case 'Yotch':
           // Yotchコンテンツ用の管理情報を取得
+          let yotchContents = {}
           url = '/api/informations/?type=account'
-          response = await $axios.get(url)
           key = 'informations'
+          response = await $axios.get(url)
+          yotchContents['yotch'] = response.data[key]
+
+          // 趣味のデータを取得
+          url = '/api/dishes'
+          key = 'dishes'
+          response = await $axios.get(url)
+          yotchContents['cooking'] = response.data[key]
+
+          contentsProps.push(yotchContents)
           break
         case 'Skills':
           // Skillsコンテンツ用の管理情報を取得
           url = '/api/skills'
           key = 'skills'
-          break
-        case 'Cooking':
-          url = '/api/dishes'
-          key = 'dishes'
+
+          response = await $axios.get(url)
+          console.log(response.data[key])
+          contentsProps.push(response.data[key])
           break
         default:
           url = ''
           key = ''
-      }
-      if (url) {
-        response = await $axios.get(url)
-        contentsProps.push(response.data[key])
-      } else {
-        contentsProps.push('')
+          contentsProps.push('')
       }
     }
 
@@ -227,9 +214,7 @@ export default {
 
 .container {
   margin: 0 auto;
-  max-width: 1030px;
-  min-height: 100vh;
-  width: 90%;
+  width: 100%;
 }
 
 .contents {
@@ -241,12 +226,18 @@ export default {
   width: 100%;
 }
 
+.fixed-width {
+  margin: 0 auto;
+  max-width: 1030px;
+  width: 90%;
+}
+
 .slide {
   align-items: center;
   box-sizing: border-box;
   color: #fff;
   display: block;
-  height: 36vh;
+  height: 70vh;
   position: relative;
 }
 
@@ -305,7 +296,7 @@ export default {
 }
 
 .slide-wrap {
-  margin: 100px auto 0;
+  margin: 0 auto;
   width: 100%;
 }
 
@@ -315,8 +306,12 @@ export default {
 }
 
 @media screen and (max-width: 767px) {
-  .container {
-    width: 100%;
+  .main .agile__slides--regular .slide {
+    height: 40vh;
+  }
+
+  .agile__slides--regular .slide--thumbnails {
+    height: 10vh;
   }
 
   .slide-wrap {
@@ -332,7 +327,7 @@ export default {
   }
 
   .slide-wrap {
-    margin: 100px 0 0 auto;
+    margin: 0 auto;
     width: 100%;
   }
 }
