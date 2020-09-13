@@ -60,14 +60,14 @@
 <script>
 import { VueAgile } from 'vue-agile'
 
-import AboutCareer from '~/components/pages/about/Career.vue'
+import AboutContact from '~/components/pages/about/Contact.vue'
 import AboutSkills from '~/components/pages/about/Skills.vue'
 import AboutYotch from '~/components/pages/about/Yotch.vue'
 
 export default {
   components: {
     agile: VueAgile,
-    AboutCareer,
+    AboutContact,
     AboutSkills,
     AboutYotch,
   },
@@ -79,8 +79,8 @@ export default {
       contentsProps: null,
       contents: [
         'about-yotch',
-        'about-career',
-        'about-skills'
+        'about-skills',
+        'about-contact'
       ],
       heights: [],
       options1: {
@@ -131,11 +131,17 @@ export default {
           response = await $axios.get(url)
           yotchContents['yotch'] = response.data[key]
 
-          // 趣味のデータを取得
+          // Cookingのデータを取得
           url = '/api/dishes'
           key = 'dishes'
           response = await $axios.get(url)
           yotchContents['cooking'] = response.data[key]
+
+          // Interiorのデータを取得
+          url = '/api/interiors'
+          key = 'interiors'
+          response = await $axios.get(url)
+          yotchContents['interior'] = response.data[key]
 
           contentsProps.push(yotchContents)
           break
@@ -145,7 +151,14 @@ export default {
           key = 'skills'
 
           response = await $axios.get(url)
-          console.log(response.data[key])
+          contentsProps.push(response.data[key])
+          break
+        case '':
+          // 連絡先等情報を取得
+          url = '/api/informations'
+          key = 'informations'
+
+          response = await $axios.get(url)
           contentsProps.push(response.data[key])
           break
         default:
@@ -154,6 +167,9 @@ export default {
           contentsProps.push('')
       }
     }
+
+    console.log(contentsProps)
+    console.log(slides)
 
     return {
       contentsProps: contentsProps,

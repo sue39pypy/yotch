@@ -26,6 +26,28 @@ class DishJSONRenderer(JSONRenderer):
                 'message': function_name + ' is failed'
             })
 
+class InteriorJSONRenderer(JSONRenderer):
+    charset = 'utf-8'
+    def render(self, data, accepted_media_type=None, renderer_context=None):
+        try:
+            logger = logging.getLogger('')
+            return json.dumps({
+                'status': 0,
+                'interiors': data,
+                'message': ''
+            },ensure_ascii=False)
+        except:
+            function_name = sys._getframe().f_code.co_name
+            log_message = function_name + '\n'\
+                          + sys.exc_info()
+            logger.error(log_message)
+            return json.dumps({
+                'status': 2,
+                'interior': [],
+                'interiors': [],
+                'message': function_name + ' is failed'
+            })
+
 class SkillJSONRenderer(JSONRenderer):
     charset = 'utf-8'
 
