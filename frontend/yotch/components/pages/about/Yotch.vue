@@ -32,15 +32,20 @@
               class="dish-content"
               :style="{ backgroundImage: 'url(' + dish.image_path + ')' }"
             >
-              <a
-                :href="dish.image_path"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-              </a>
             </div>
           </li>
         </ul>
+      </section>
+
+      <section id="interior-sec">
+        <kv
+          title="Interior"
+          :description="[
+            '素敵な部屋づくりのため日々奮闘しています',
+            'スパイスラックを作ったりとDIYにも手を出し始めました'
+          ]"
+          image="/assets/img/interior.jpg"
+        ></kv>
       </section>
 
     </div>

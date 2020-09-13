@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Dish, Skill, Slide, Wallpaper
+from .models import Dish, Interior, Skill, Slide, Wallpaper
 
 class DishSerializer(serializers.ModelSerializer):
     class Meta:
@@ -31,6 +31,31 @@ class DishListSerializer(serializers.ModelSerializer):
 
     def get_caption_converted(self, obj):
         return obj.caption.splitlines()
+
+class InteriorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Interior
+        fields = (
+            'title',
+            'image_path',
+            'description_converted',
+            'rank'
+        )
+class InteriorListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Interior
+        fields = (
+            'title',
+            'image_path',
+            'description_converted',
+            'rank'
+        )
+    image_path = serializers.SerializerMethodField()
+    description_converted = serializers.SerializerMethodField()
+    def get_image_path(self, obj):
+        return '/media/' + str(obj.image)
+    def get_description_converted(self, obj):
+        return obj.description.splitlines()
 
 class SkillSerializer(serializers.ModelSerializer):
     class Meta:

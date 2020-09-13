@@ -1,12 +1,12 @@
 <template>
-  <div class="content-container">
+  <div class="content-container fixed-width">
     <Heading2>{{ content.title }}</Heading2>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'AboutCareer',
+  name: 'AboutContact',
   props: [
     'content',
     'contentProps'
@@ -31,6 +31,12 @@ export default {
 
 .description-wrap {
   margin-top: 40px;
+}
+
+.fixed-width {
+  margin: 0 auto;
+  max-width: 1030px;
+  width: 90%;
 }
 
 .interior {

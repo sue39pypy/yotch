@@ -1,5 +1,5 @@
 <template>
-  <div class="content-container">
+  <div class="content-container fixed-width">
     <Heading2>{{ content.title }}</Heading2>
     <div class="detail-wrap">
       <div
@@ -39,10 +39,10 @@
 <script>
 export default {
   name: 'AboutSkills',
-  props: [
-    'content',
-    'contentProps'
-  ],
+  props: {
+    'content': Object,
+    'contentProps': Array
+  },
   data () {
     return {
       skills: []
@@ -59,6 +59,12 @@ export default {
 .content-container {
   margin: 0 auto;
   width: 100%;
+}
+
+.fixed-width {
+  margin: 0 auto;
+  max-width: 1030px;
+  width: 90%;
 }
 
 .skill {
