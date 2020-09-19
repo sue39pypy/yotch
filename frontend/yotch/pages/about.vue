@@ -168,9 +168,6 @@ export default {
       }
     }
 
-    console.log(contentsProps)
-    console.log(slides)
-
     return {
       contentsProps: contentsProps,
       slides: slides

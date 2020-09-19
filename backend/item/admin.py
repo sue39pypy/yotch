@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Dish, Interior, Skill, Slide, Wallpaper
+from .models import Dish, Interior, Skill, Slide, Wallpaper, Work
 
 class DishAdmin(admin.ModelAdmin):
     list_display = ('title', 'image', 'caption', 'url', 'rank', 'admin_image')
@@ -35,8 +35,15 @@ class WallpaperAdmin(admin.ModelAdmin):
     def _meta(self, row):
         return ','.join([x.name for x in row.meta.all()])
 
+class WorkAdmin(admin.ModelAdmin):
+    list_display = ('name', 'tags', 'url', 'image', 'rank', 'admin_image')
+
+    def _meta(self, row):
+        return ','.join([x.name for x in row.meta.all()])
+
 admin.site.register(Dish, DishAdmin)
 admin.site.register(Interior, InteriorAdmin)
 admin.site.register(Skill, SkillAdmin)
 admin.site.register(Slide, SlideAdmin)
 admin.site.register(Wallpaper, WallpaperAdmin)
+admin.site.register(Work, WorkAdmin)
