@@ -51,8 +51,9 @@
             v-for="(interior, index) in contentProps.interior"
             :key="'interior-' + index"
             class="interior"
-            :style="{ backgroundImage: 'url(' + interior.image_path + ')' }"
           >
+            <div :style="{ backgroundImage: 'url(' + interior.image_path + ')' }">
+            </div>
           </div>
         </div>
       </section>
@@ -166,10 +167,16 @@ section:first-child {
 }
 
 .interior {
+  height: 300px;
+  padding: 5px;
+  width: 50%;
+}
+
+.interior div {
   background-position: center;
   background-size: cover;
-  height: 240px;
-  width: 50%;
+  height: 100%;
+  width: 100%;
 }
 
 .interior-wrap {
@@ -178,7 +185,7 @@ section:first-child {
   display: -webkit-box;
   flex-wrap: wrap;
   margin: 100px auto 0;
-  width: 60%;
+  width: 68%;
 }
 
 .social-wrap {

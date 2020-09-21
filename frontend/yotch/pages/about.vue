@@ -204,9 +204,7 @@ export default {
       let tmp = []
       let height = 0
       for (let i = 0; i < contentsContainers.length; i++) {
-        console.log('height iterate index is ' + i)
         height = contentsContainers[i].firstElementChild.clientHeight
-        console.log(height)
         tmp.push(height)
       }
       this.heights = tmp
