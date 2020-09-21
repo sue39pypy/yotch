@@ -10,7 +10,6 @@ class InformationSerializer(serializers.ModelSerializer):
             'value',
             'url',
             'icon',
-            'is_for_contact',
             'rank'
         )
 
@@ -23,6 +22,5 @@ class InformationListSerializer(serializers.ModelSerializer):
             'value',
             'url',
             'icon',
-            'is_for_contact',
             'rank'
         )

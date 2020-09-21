@@ -13,15 +13,6 @@
           <nuxt-link :to="menu.path">{{ menu.title }}</nuxt-link>
         </li>
       </ul>
-      <div class="address-wrap">
-        <p><i class="fas fa-envelope"></i>&nbsp;{{ address }}</p>
-      </div>
-
-      <ul class="social-wrap">
-        <li v-for="(account, index) in accounts" :key="`social-${index}`">
-          <a :href="account.url" target="_blank" rel="noopener noreferrer"><i :class="`social-icon ${account.icon}`"></i></a>
-        </li>
-      </ul>
 
       <div class="copyright-wrap">
         <p class="copyright"><i class="far fa-copyright"></i>&nbsp;2020 Youki Yoshioka</p>

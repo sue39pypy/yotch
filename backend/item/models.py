@@ -241,7 +241,7 @@ class Wallpaper(ImageModel):
 
     properties
     name : str
-        スライドタイトル
+        壁紙タイトル
     image : str
         イメージ参照パス
     caption : str
@@ -257,6 +257,66 @@ class Wallpaper(ImageModel):
     )
     caption = models.TextField(
         verbose_name='壁紙説明'
+    )
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='作成日時'
+    )
+    updated_at = models.DateTimeField(
+        auto_now=True,
+        verbose_name='更新日時'
+    )
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ('-created_at',)
+
+class Work(ImageModel):
+    """
+    ページ内に表示する壁紙クラス
+
+    properties
+    name : str
+        製作物タイトル
+    tags : str
+        タグ
+        言語、フレームワーク等を|区切りで
+    image : str
+        イメージ参照パス
+    description : str
+        キャプション
+    rank : int
+        並び順
+    created_at : datetime
+        作成日時
+    updated_at : datetime
+        更新日時
+    """
+    name = models.CharField(
+        max_length=50,
+        verbose_name='製作物名称'
+    )
+    tags = models.TextField(
+        blank=False,
+        null=False,
+        verbose_name='タグ'
+    )
+    url = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name='URL'
+    )
+    description = models.TextField(
+        verbose_name='製作物説明'
+    )
+    rank = models.IntegerField(
+        verbose_name='ランク',
+        blank=False,
+        null=False,
+        default=0,
+        validators=[MinValueValidator(0)]
     )
     created_at = models.DateTimeField(
         auto_now_add=True,

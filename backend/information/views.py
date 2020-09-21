@@ -43,13 +43,7 @@ class InformationSpecifiedTypeListApiView(ListAPIView):
 
             logging.info(queryset_type)
 
-            if self.request.GET.get('is_for_contact'):
-                queryset_is_for_contact = Information.objects.filter(is_for_contact=self.request.GET.get('is_for_contact'))
-            else:
-                queryset_is_for_contact = Information.objects.all()
-
-            logging.info(queryset_is_for_contact)
-            queryset = queryset_type & queryset_is_for_contact
+            queryset = queryset_type
             logging.info(queryset)
             return queryset
         except:

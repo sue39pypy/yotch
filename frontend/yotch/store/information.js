@@ -19,12 +19,12 @@ export const actions = {
   // 情報をセット
   async setInformation ({ commit }) {
     // 基本情報取得APIを呼び出し
-    let url = '/api/informations/?type=profile&is_for_contact=1'
+    let url = '/api/informations/?type=profile'
     let response = await this.$axios.get(url)
     commit('setProfile', response.data.informations)
 
     // アカウント情報取得APIを呼び出し
-    url = '/api/informations/?type=account&is_for_contact=1'
+    url = '/api/informations/?type=account'
     response = await this.$axios.get(url)
     commit('setAccounts', response.data.informations)
   }

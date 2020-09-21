@@ -17,7 +17,7 @@
           title="Cooking"
           :description="[
             '大学生の頃から料理をしています',
-            'レパートリーの一部を見てってください'
+            'レパートリーの一部を公開します'
           ]"
           image="/assets/img/cooking.jpg"
         ></kv>
@@ -26,7 +26,7 @@
           <li
             v-for="(dish, index) in contentProps['cooking']"
             :key="'dish-' + index"
-            :class="['dish', 'dish' + index]"
+            class="dish"
           >
             <div
               class="dish-content"
@@ -46,6 +46,16 @@
           ]"
           image="/assets/img/interior.jpg"
         ></kv>
+        <div class="interior-wrap">
+          <div
+            v-for="(interior, index) in contentProps.interior"
+            :key="'interior-' + index"
+            class="interior"
+          >
+            <div :style="{ backgroundImage: 'url(' + interior.image_path + ')' }">
+            </div>
+          </div>
+        </div>
       </section>
 
     </div>
@@ -60,10 +70,10 @@ export default {
   components: {
     Kv
   },
-  props: [
-    'content',
-    'contentProps'
-  ],
+  props: {
+    'content': Object,
+    'contentProps': Array
+  },
   data () {
     return {
       accounts: []
@@ -156,6 +166,28 @@ section:first-child {
   margin-top: 40px;
 }
 
+.interior {
+  height: 300px;
+  padding: 5px;
+  width: 50%;
+}
+
+.interior div {
+  background-position: center;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.interior-wrap {
+  display: flex;
+  display: -ms-flexbox;
+  display: -webkit-box;
+  flex-wrap: wrap;
+  margin: 100px auto 0;
+  width: 68%;
+}
+
 .social-wrap {
   display: flex;
   display: -ms-flexbox;
@@ -195,6 +227,10 @@ section:first-child {
 
   .info-row {
     font-size: 1.0rem;
+  }
+
+  .interior-wrap {
+    width: 100%;
   }
 
   .social-wrap li a i {

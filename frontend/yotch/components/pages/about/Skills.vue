@@ -61,6 +61,15 @@ export default {
   width: 100%;
 }
 
+.detail-wrap {
+  align-content: center;
+  display: flex;
+  display: -ms-flexbox;
+  flex-wrap: wrap;
+  margin: 40px auto 0;
+  width: 100%;
+}
+
 .fixed-width {
   margin: 0 auto;
   max-width: 1030px;
@@ -88,15 +97,6 @@ export default {
 
 .skill-name {
   font-size: 1.0rem;
-}
-
-.detail-wrap {
-  align-content: center;
-  display: flex;
-  display: -ms-flexbox;
-  flex-wrap: wrap;
-  margin: 40px auto 0;
-  width: 100%;
 }
 
 @media screen and (max-width: 767px) {

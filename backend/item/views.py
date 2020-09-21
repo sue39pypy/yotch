@@ -3,9 +3,9 @@ from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
-from .models import Dish, Interior, Skill, Slide, Wallpaper
-from .renderers import DishJSONRenderer, InteriorJSONRenderer, SkillJSONRenderer, SlideJSONRenderer, WallpaperJSONRenderer
-from .serializers import DishListSerializer, DishSerializer, InteriorListSerializer, InteriorSerializer, SkillListSerializer, SkillSerializer, SlideListSerializer, SlideSerializer, WallpaperListSerializer, WallpaperSerializer
+from .models import Dish, Interior, Skill, Slide, Wallpaper, Work
+from .renderers import DishJSONRenderer, InteriorJSONRenderer, SkillJSONRenderer, SlideJSONRenderer, WallpaperJSONRenderer, WorkJSONRenderer
+from .serializers import DishListSerializer, DishSerializer, InteriorListSerializer, InteriorSerializer, SkillListSerializer, SkillSerializer, SlideListSerializer, SlideSerializer, WallpaperListSerializer, WallpaperSerializer, WorkListSerializer, WorkSerializer
 
 class DishListAPIView(ListAPIView):
     model = Dish
@@ -94,5 +94,23 @@ class WallpaperRetrieveAPIView(RetrieveAPIView):
     def retrieve(self, request, wallpaper_id, *args, **kwargs):
         wallpaper = Wallpaper.objects.get(id=wallpaper_id)
         serializer = self.serializer_class(wallpaper)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+class WorkListAPIView(ListAPIView):
+    model = Work
+    queryset = Work.objects.all()
+    permission_classes = (AllowAny, )
+    renderer_classes = (WorkJSONRenderer, )
+    serializer_class = WorkListSerializer
+
+class WorkRetrieveAPIView(RetrieveAPIView):
+    permission_classes = (AllowAny, )
+    renderer_classes = (WorkJSONRenderer, )
+    serializer_class = WorkSerializer
+
+    def retrieve(self, request, work_id, *args, **kwargs):
+        work = Work.objects.get(id=work_id)
+        serializer = self.serializer_class(work)
 
         return Response(serializer.data, status=status.HTTP_200_OK)

@@ -22,9 +22,6 @@ class Information(models.Model):
         アカウントトップページURL
     icon : str
         font-awesomeアイコンの識別class
-    is_for_contact : int
-        フッター等連作先表示領域に表示するかどうか
-        0: 表示しない、1: 表示する
     rank : int
         並び順
     created_at : datetime
@@ -55,11 +52,6 @@ class Information(models.Model):
         null=True,
         verbose_name='アイコンクラス'
     )
-    is_for_contact = models.IntegerField(
-        default=0,
-        verbose_name='連絡先表示用フラグ',
-        validators=[check_flg_item]
-    )
     rank = models.IntegerField(
         verbose_name='ランク',
         blank=False,
@@ -78,3 +70,6 @@ class Information(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        ordering = ('rank',)
