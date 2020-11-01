@@ -5,7 +5,7 @@ from .models import Information
 # Register your models here.
 
 class InformationAdmin(admin.ModelAdmin):
-    list_display = ('name', 'type', 'value', 'url', 'icon', 'rank')
+    list_display = ('name', 'name_ja', 'type', 'value', 'url', 'icon', 'color', 'rank')
     ordering = ('rank',)
 
     def _meta(self, row):

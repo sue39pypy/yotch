@@ -72,7 +72,7 @@ export default {
   },
   props: {
     'content': Object,
-    'contentProps': Array
+    'contentProps': Object
   },
   data () {
     return {
@@ -108,7 +108,7 @@ section:first-child {
 }
 
 .description-wrap {
-  margin-top: 40px;
+  margin-top: 100px;
 }
 
 .dish-wrap {

@@ -12,6 +12,8 @@ class Information(models.Model):
 
     name : str
         SNS名称
+    name_ja : str
+        和名
     type : str
         情報種別
         'account' : SNSアカウント
@@ -22,6 +24,8 @@ class Information(models.Model):
         アカウントトップページURL
     icon : str
         font-awesomeアイコンの識別class
+    color : str
+        画面描画時の背景色
     rank : int
         並び順
     created_at : datetime
@@ -32,6 +36,12 @@ class Information(models.Model):
     name = models.CharField(
         max_length=50,
         verbose_name='サービス名称'
+    )
+    name_ja = models.CharField(
+        max_length=50,
+        verbose_name='和名',
+        blank=True,
+        null=True
     )
     type = models.CharField(
         max_length=50,
@@ -51,6 +61,12 @@ class Information(models.Model):
         blank=True,
         null=True,
         verbose_name='アイコンクラス'
+    )
+    color = models.CharField(
+        max_length=20,
+        blank=True,
+        null=True,
+        verbose_name='背景色'
     )
     rank = models.IntegerField(
         verbose_name='ランク',

@@ -30,6 +30,7 @@ export default {
 
 <style scoped>
 * {
+  color: #333;
   font-size: 1.6rem;
 }
 

@@ -1,36 +1,62 @@
 <template>
   <div class="content-container fixed-width">
     <Heading2>{{ content.title }}</Heading2>
+
+    <ul class="info-wrap">
+      <li v-for="(information, index) in contentProps"
+        :key="'information-' + index"
+      >
+        <a
+          v-if="information.url"
+          :href="information.url"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i
+            :class="`icon ${information.icon}`"
+            :data-color="information.name.toLowerCase()"
+          ></i>
+        </a>
+        <span v-else>
+          <i
+            :class="`icon ${information.icon}`"
+            content="Copied!"
+            :data-color="information.name.toLowerCase()"
+            :data-info="information.value"
+            :data-name-ja="information.name_ja"
+            v-tippy="{ placement: 'top', arrow: true, trigger: 'click'}"
+            @click="copyToClipboard(information.value)"
+          ></i>
+        </span>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
 export default {
   name: 'AboutContact',
-  props: [
-    'content',
-    'contentProps'
-  ],
+  props: {
+    'content': Object,
+    'contentProps': Array
+  },
   data () {
     return {
       interiors: null
+    }
+  },
+  methods: {
+    copyToClipboard (text) {
+      this.$copyText(text)
     }
   }
 }
 </script>
 
 <style scoped>
-* {
-  color: #333333;
-}
-
 .content-container {
   margin: 0 auto;
   width: 100%;
-}
-
-.description-wrap {
-  margin-top: 40px;
 }
 
 .fixed-width {
@@ -39,56 +65,64 @@ export default {
   width: 90%;
 }
 
-.interior {
-  background-position: center;
-  background-size: cover;
+a:visited {
+  color: #333333;
 }
 
-.images-wrap {
-  column-count: 2;
-  column-gap: 0;
-  height: auto;
-  margin: 40px auto 0;
+ul.info-wrap {
+  display: flex;
+  display: -ms-flexbox;
+  display: -webkit-box;
+  flex-wrap: wrap;
+  margin: 100px auto 0;
   width: 100%;
 }
 
-.images-wrap .interior {
-  -webkit-column-break-inside: avoid;
-  padding: 2px;
-  page-break-inside: avoid;
-  position: relative;
-  break-inside: avoid;
+ul.info-wrap li {
+  color: #333333;
+  margin-bottom: 20px;
+  padding: 20px;
+  text-align: center;
+  width: 33%;
 }
 
-.images-wrap .interior img {
-  height: auto;
-  vertical-align: top;
-  width: 100%;
-  z-index: 1;
+ul.info-wrap li span {
+  cursor: pointer;
 }
 
-.images-wrap .interior .mask {
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, .3));
-  background-position: 100% 50%;
-  background-repeat: no-repeat;
-  background-size: 100%;
-  height: 100%;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  z-index: 10;
+ul.info-wrap li * {
+  font-size: 2.8rem;
+  transition: all .5s;
 }
 
-.images-wrap .interior .title {
-  bottom: 0;
-  color: #FFF;
-  font-size: 1.2rem;
-  left: 0;
-  opacity: .8;
-  padding: 10px;
-  position: absolute;
-  z-index: 20;
+ul.info-wrap li *:hover {
+  transform: translateY(-10px);
+  background-color: attr(color);
+}
+
+ul.info-wrap li * i {
+  transition: all .5s;
+}
+
+ul.info-wrap li *:hover i[data-color="twitter"] {
+  color: #1DA1F2;
+}
+
+ul.info-wrap li *:hover i[data-color="instagram"] {
+  color: #f00075;
+}
+
+ul.info-wrap li *:hover i[data-color="facebook"] {
+  color: #1877f2;
+}
+
+ul.info-wrap li *:hover i[data-color="email"],
+ul.info-wrap li *:hover i[data-color="github"] {
+  color: #000;
+}
+
+ul.info-wrap li *:hover i[data-color="linkedin"] {
+  color: #0e76a8;
 }
 
 @media screen and (max-width: 767px) {
@@ -96,17 +130,8 @@ export default {
     width: 90%;
   }
 
-  .description-wrap p {
-    font-size: .9rem;
-  }
-
-  .images-wrap .interior {
-    padding: 1px;
-  }
-
-  .images-wrap .interior .title {
-    font-size: 0.8rem;
-    padding: 5px;
+  ul.info-wrap li * {
+    font-size: 2.4rem;
   }
 }
 </style>

@@ -66,7 +66,7 @@ export default {
   display: flex;
   display: -ms-flexbox;
   flex-wrap: wrap;
-  margin: 40px auto 0;
+  margin: 100px auto 0;
   width: 100%;
 }
 

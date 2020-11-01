@@ -153,7 +153,7 @@ export default {
           response = await $axios.get(url)
           contentsProps.push(response.data[key])
           break
-        case '':
+        case 'Contact':
           // 連絡先等情報を取得
           url = '/api/informations'
           key = 'informations'
@@ -226,6 +226,7 @@ export default {
 .container {
   margin: 0 auto;
   width: 100%;
+  will-change: transform;
 }
 
 .contents {
