@@ -6,10 +6,12 @@ class InformationSerializer(serializers.ModelSerializer):
         model = Information
         fields = (
             'name',
+            'name_ja',
             'type',
             'value',
             'url',
             'icon',
+            'color',
             'rank'
         )
 
@@ -18,9 +20,11 @@ class InformationListSerializer(serializers.ModelSerializer):
         model = Information
         fields = (
             'name',
+            'name_ja',
             'type',
             'value',
             'url',
             'icon',
+            'color',
             'rank'
         )
